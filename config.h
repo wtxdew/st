@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Fira Code Nerd Font Mono:pixelsize=24:antialias=true:autohint=true";
+static char *font = "SauceCodePro Nerd Font Mono:pixelsize=24:antialias=true:autohint=true";
 static int borderpx = 2;
 
 /*
@@ -188,6 +188,7 @@ static MouseShortcut mshortcuts[] = {
 
 /* Internal keyboard shortcuts. */
 #define MODKEY Mod1Mask
+#define COMKEY Mod4Mask
 #define TERMMOD (ControlMask|ShiftMask)
 
 static Shortcut shortcuts[] = {
@@ -204,6 +205,12 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
+	{ COMKEY,               XK_k,     	kscrollup,      {.i =  1} },
+	{ COMKEY,               XK_j,   	kscrolldown,    {.i =  1} },
+	{ COMKEY|ControlMask,   XK_k,     	kscrollup,      {.i = -1} },
+	{ COMKEY|ControlMask,   XK_j,   	kscrolldown,    {.i = -1} },
+	{ COMKEY,               XK_Page_Up,     kscrollup,      {.i = -1} },
+	{ COMKEY,               XK_Page_Down,   kscrolldown,    {.i = -1} },
 };
 
 /*
