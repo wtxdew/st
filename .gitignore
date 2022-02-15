@@ -1,4 +1,6 @@
 st
-*.o
-*.orig
 *.rej
+*.o
+patches
+*.orig
+

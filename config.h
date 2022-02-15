@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "SauceCodePro Nerd Font Mono:pixelsize=24:antialias=true:autohint=true";
+static char *font = "SauceCodePro Nerd Font Mono:pixelsize=30:antialias=true:autohint=true";
 static int borderpx = 2;
 
 /*
@@ -94,7 +94,7 @@ char *termname = "st-256color";
 unsigned int tabspaces = 8;
 
 /* bg opacity */
-float alpha = 0.8;
+float alpha = 0.9;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
@@ -173,23 +173,25 @@ static unsigned int defaultattr = 11;
  */
 static uint forcemousemod = ShiftMask;
 
+/* Internal keyboard shortcuts. */
+#define MODKEY Mod1Mask
+#define COMKEY Mod4Mask
+#define TERMMOD (ControlMask|ShiftMask)
+
 /*
  * Internal mouse shortcuts.
  * Beware that overloading Button1 will disable the selection.
  */
 static MouseShortcut mshortcuts[] = {
 	/* mask                 button   function        argument       release */
+	{ COMKEY,               Button4, kscrollup,      {.i = 1} },
+	{ COMKEY,               Button5, kscrolldown,    {.i = 1} },
 	{ XK_ANY_MOD,           Button2, selpaste,       {.i = 0},      1 },
 	{ ShiftMask,            Button4, ttysend,        {.s = "\033[5;2~"} },
 	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
 	{ ShiftMask,            Button5, ttysend,        {.s = "\033[6;2~"} },
 	{ XK_ANY_MOD,           Button5, ttysend,        {.s = "\005"} },
 };
-
-/* Internal keyboard shortcuts. */
-#define MODKEY Mod1Mask
-#define COMKEY Mod4Mask
-#define TERMMOD (ControlMask|ShiftMask)
 
 // from @LukeSmithxyz
 static char *openurlcmd[] = { "/bin/sh", "-c",
@@ -212,8 +214,6 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_Prior,       zoom,           {.f = +1} },
 	{ TERMMOD,              XK_Next,        zoom,           {.f = -1} },
 	{ TERMMOD,              XK_Home,        zoomreset,      {.f =  0} },
-	{ TERMMOD,              XK_C,           clipcopy,       {.i =  0} },
-	{ TERMMOD,              XK_V,           clippaste,      {.i =  0} },
 	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
@@ -224,6 +224,8 @@ static Shortcut shortcuts[] = {
 	{ COMKEY|ControlMask,   XK_j,   	kscrolldown,    {.i = -1} },
 	{ COMKEY,               XK_Page_Up,     kscrollup,      {.i = -1} },
 	{ COMKEY,               XK_Page_Down,   kscrolldown,    {.i = -1} },
+	{ COMKEY,               XK_c,           clipcopy,       {.i =  0} },
+	{ COMKEY,               XK_v,           clippaste,      {.i =  0} },
 };
 
 /*
